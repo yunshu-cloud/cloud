@@ -1,0 +1,94 @@
+server:
+  port: 80
+eureka:
+  client:
+    service-url:
+      # 指定eureka server 地址
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    instance-id: cloud-order-resilience4j-consumer80
+spring:
+  application:
+    name: cloud-order-consumer
+
+# 超级机制
+resilience4j:
+  retry:
+    instances:
+      backendA:
+        max-attempts: 3
+        wait-duration: 10s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+  timelimiter:
+    instances:
+      delay:
+        # 设置超时时间5秒
+        timeout-duration: 2
+
+
+# 熔断降级
+#resilience4j.circuitbreaker:
+#  configs:
+#    default:
+#      # 熔断器打开的失败阈值
+#      failureRateThreshold: 30
+#      # 默认滑动窗口大小，circuitbreaker使用基于计数和时间范围欢动窗口聚合统计失败率
+#      slidingWindowSize: 10
+#      # 计算比率的最小值，和滑动窗口大小去最小值，即当请求发生5次才会计算失败率
+#      minimumNumberOfCalls: 5
+#      # 滑动窗口类型，默认为基于计数的滑动窗口
+#      slidingWindowType: TIME_BASED
+#      # 半开状态允许的请求数
+#      permittedNumberOfCallsInHalfOpenState: 3
+#      # 是否自动从打开到半开
+#      automaticTransitionFromOpenToHalfOpenEnabled: true
+#      # 熔断器从打开到半开需要的时间
+#      waitDurationInOpenState: 2s
+#      recordExceptions:
+#        - java.lang.Exception
+#  instances:
+#    backendA:
+#      baseConfig: default
+
+
+
+
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      # 熔断器打开的失败阈值
+      failureRateThreshold: 30
+      # 默认滑动窗口大小，circuitbreaker使用基于计数和时间范围欢动窗口聚合统计失败率
+      slidingWindowSize: 10
+      # 计算比率的最小值，和滑动窗口大小去最小值，即当请求发生5次才会计算失败率
+      minimumNumberOfCalls: 5
+      # 滑动窗口类型，默认为基于计数的滑动窗口
+      slidingWindowType: TIME_BASED
+      # 半开状态允许的请求数
+      permittedNumberOfCallsInHalfOpenState: 3
+      # 是否自动从打开到半开
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      # 熔断器从打开到半开需要的时间
+      waitDurationInOpenState: 2s
+      recordExceptions:
+        - java.lang.Exception
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      # 熔断器打开的失败阈值
+      failureRateThreshold: 50
+      # 慢调用时间阈值 高于这个阈值的
+      slowCallDurationThreshold: 2s
+      # 慢调用百分比阈值，断路器吧调用事件大于slow
+      slowCallRateThreshold: 30
+      slidingWindowSize: 10
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 2
+      permittedNumberOfCallsInHalfOpenState: 2
+      waitDurationInOpenState: 2s
+      eventConsumerBufferSize: 10
+
+
