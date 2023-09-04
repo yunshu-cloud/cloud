@@ -35,7 +35,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
         </dependency>
         <!-- actuator监控信息完善 -->
         <dependency>
@@ -50,6 +49,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-bulkhead</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+
     </dependencies>
 
 

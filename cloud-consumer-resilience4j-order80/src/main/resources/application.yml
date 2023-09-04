@@ -6,25 +6,56 @@ eureka:
       # 指定eureka server 地址
       defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
   instance:
-    instance-id: cloud-order-resilience4j-consumer80
+    instance-id: instance-consumer
 spring:
   application:
-    name: cloud-order-consumer
+    name: application-consumer
 
 # 超级机制
 resilience4j:
-  retry:
-    instances:
-      backendA:
-        max-attempts: 3
-        wait-duration: 10s
-        enable-exponential-backoff: true
-        exponential-backoff-multiplier: 2
+  # 超时机制
   timelimiter:
     instances:
       delay:
-        # 设置超时时间5秒
-        timeout-duration: 2
+        # 设置超时时间 5秒
+        timeoutDuration: 2
+  ratelimiter:
+    instances:
+      backendA:
+        # 限流周期时长。    默认：500纳秒
+        limitRefreshPeriod: 5s
+        # 周期内允许通过的请求数量。    默认：50
+        limitForPeriod: 2
+
+  thread-pool-bulkhead:
+    instances:
+      backendA:
+        # 最大线程池大小
+        maxThreadPoolSize: 4
+        # 核心线程池大小
+        coreThreadPoolSize: 2
+        #  队列容量
+        queueCapacity: 2
+  #信号量隔离
+  bulkhead:
+    instances:
+      backendA:
+        # 隔离允许并发线程执行的最大数量
+        maxConcurrentCalls: 5
+        # 当达到并发调用数量时，新的线程的阻塞时间
+        maxWaitDuration: 20ms
+  retry:
+    instances:
+      backendA:
+        # 最大重试次数
+        maxRetryAttempts: 3
+        # 固定的重试间隔
+        waitDuration: 10s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+
+
+
 
 
 # 熔断降级
@@ -54,7 +85,7 @@ resilience4j:
 
 
 
-
+#
 resilience4j.circuitbreaker:
   configs:
     default:

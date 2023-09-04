@@ -19,6 +19,7 @@ public class OrderController
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    // 服务调用
     @Autowired
     private RestTemplate restTemplate;
 
@@ -48,21 +49,18 @@ public class OrderController
     {
 
         // 服务生产者名字
-        String hostName = "CLOUD-PAYMENT-PROVIDER";
+        String hostName = "APPLICATION-PROVIDER";
 
         // 远程调用方法具体的URL
         String url = "/payment/index";
-        // 1. 服务发现中获取服务生产者的实例
-        List<ServiceInstance> instances = discoveryClient.getInstances(hostName);
-
-        // 2. 获取到具体实例 服务生产者实例
-        ServiceInstance serviceInstance = instances.get(0);
-        System.out.println(serviceInstance.getUri());
-        System.out.println(serviceInstance.getHost());
-        System.out.println(serviceInstance.getPort());
-        System.out.println(serviceInstance.getServiceId());
-        System.out.println("===========================");
-        String rest = restTemplate.getForObject(serviceInstance.getUri() + url, String.class);
+        String host = "http://application-provider";
+//        // 1. 服务发现中获取服务生产者的实例
+//        List<ServiceInstance> instances = discoveryClient.getInstances(hostName);
+//
+//        // 2. 获取到具体实例 服务生产者实例
+//        ServiceInstance serviceInstance = instances.get(0);
+        String rest = restTemplate.getForObject(host+url, String.class);
+//        String rest = restTemplate.getForObject("http://localhost:8001" + url, String.class);
         System.out.println(rest);
         return rest;
     }

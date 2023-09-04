@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 订单控制层
  */
 @RestController
-@RequestMapping("order")
+@RequestMapping("/order")
 public class OrderController
 {
     /**
@@ -22,9 +22,18 @@ public class OrderController
      * openfeign 远程服务调用
      * @return
      */
-    @GetMapping("index")
+    @GetMapping("/index")
     public String index()
     {
         return paymentFeignService.index();
+    }
+
+    /**
+     * 测试超时机制
+     * @return
+     */
+    @GetMapping("/timeout")
+    public String timeout(){
+        return paymentFeignService.timeout();
     }
 }

@@ -2,11 +2,16 @@ server:
   port: 80
 eureka:
   client:
+    # 表示是否将自己注册到Eureka Server
+    register-with-eureka: true
+    # 示是否从Eureka Server获取注册的服务信息
+    fetch-registry: true
     service-url:
       # 指定eureka server 地址
       defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
   instance:
     instance-id: cloud-order-openfeign-consumer80
+    prefer-ip-address: true
 spring:
   application:
     name: cloud-order-consumer
@@ -14,3 +19,11 @@ spring:
 logging:
   level:
     com.itbaizhan.service: debug
+
+
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 2000
+        read-timeout: 2000

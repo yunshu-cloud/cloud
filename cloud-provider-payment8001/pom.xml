@@ -30,14 +30,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
         </dependency>
 
+        <!-- actuator监控信息完善 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>2.6.3</version>
         </dependency>
+
     </dependencies>
 
 </project>

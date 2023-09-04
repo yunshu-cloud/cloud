@@ -1,0 +1,10 @@
+server:
+  port: 9527
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: cloud-order-consumer
+          uri: http://localhost:80
+          predicates:
+            - Path=/order/*

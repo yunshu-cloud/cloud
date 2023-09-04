@@ -9,7 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cloud-consumer-openfeign-order80</artifactId>
+    <groupId>com.baizhan</groupId>
+    <artifactId>cloud_gateway_gateway9527</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -18,27 +19,15 @@
     </properties>
 
     <dependencies>
-        <!--  引入Eureka client依赖  -->
+        <!--  引入网关Gateway依赖   -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!-- 引入服务调用依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>1.18.22</version>
         </dependency>
     </dependencies>
 

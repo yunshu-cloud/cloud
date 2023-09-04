@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 // 声明openfeign客户端
-@FeignClient("CLOUD-PAYMENT-PROVIDER")  // 生命调用服务生产者的名字
+@FeignClient("APPLICATION-PROVIDER")  // 生命调用服务生产者的名字
 public interface PaymentOpenFeignService
 {
     @GetMapping("/payment/timeout")

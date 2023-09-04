@@ -8,12 +8,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-eureka-server7001" />
-        <module name="cloud-consumer-order80" />
         <module name="cloud-provider-payment8001" />
         <module name="cloud-consumer-resilience4j-order80" />
         <module name="cloud-eureka-server7002" />
         <module name="cloud-consumer-openfeign-order80" />
+        <module name="cloud-consumer-order80" />
+        <module name="cloud_gateway_gateway9527" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud_gateway_gateway9527" options="" />
+    </option>
   </component>
 </project>
